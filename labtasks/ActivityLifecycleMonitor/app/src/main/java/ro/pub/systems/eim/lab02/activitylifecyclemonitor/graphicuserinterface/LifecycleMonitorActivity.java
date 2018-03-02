@@ -1,5 +1,6 @@
 package ro.pub.systems.eim.lab02.activitylifecyclemonitor.graphicuserinterface;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,7 +63,53 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(buttonClickListener);
 
-        Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+        if(savedInstanceState != null) {
+            Log.d(Constants.TAG, "onCreate() method was invoked with a previous state");
+        } else {
+            Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onStart() method was invoked without a previous state");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onRestart() method was invoked without a previous state");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onResume() method was invoked without a previous state");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onPause() method was invoked without a previous state");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onStop() method was invoked without a previous state");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setContentView(R.layout.activity_lifecycle_monitor);
+        Log.d(Constants.TAG, "onDestroy() method was invoked without a previous state");
     }
 
 }
