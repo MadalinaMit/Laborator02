@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
@@ -53,6 +54,29 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
 
     }
 
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        EditText username = (EditText) findViewById(R.id.username_edit_text);
+        CheckBox checkBox = (CheckBox) findViewById(R.id.remember_me_checkbox);
+        if (checkBox.isChecked()) {
+            savedInstanceState.putString(Constants.USERNAME_EDIT_TEXT, username.getText().toString());
+        }
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState.containsKey(Constants.USERNAME_EDIT_TEXT)) {
+            EditText username = (EditText) findViewById(R.id.username_edit_text);
+            username.setText(savedInstanceState.getString(Constants.USERNAME_EDIT_TEXT));
+        }
+
+        if(savedInstanceState.containsKey(Constants.PASSWORD_EDIT_TEXT)) {
+            EditText username = (EditText) findViewById(R.id.password_edit_text);
+            username.setText(savedInstanceState.getString(Constants.PASSWORD_EDIT_TEXT));
+        }
+    }
+
+    @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +91,18 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
             Log.d(Constants.TAG, "onCreate() method was invoked with a previous state");
         } else {
             Log.d(Constants.TAG, "onCreate() method was invoked without a previous state");
+            if (savedInstanceState.containsKey(Constants.USERNAME_EDIT_TEXT)) {
+                EditText usernameEditText = (EditText)findViewById(R.id.username_edit_text);
+                usernameEditText.setText(savedInstanceState.getString(Constants.USERNAME_EDIT_TEXT));
+            }
+            if (savedInstanceState.containsKey(Constants.PASSWORD_EDIT_TEXT)) {
+                EditText passwordEditText = (EditText)findViewById(R.id.password_edit_text);
+                passwordEditText.setText(savedInstanceState.getString(Constants.PASSWORD_EDIT_TEXT));
+            }
         }
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onStart() {
         super.onStart();
@@ -77,6 +110,7 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Log.d(Constants.TAG, "onStart() method was invoked without a previous state");
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -84,6 +118,7 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Log.d(Constants.TAG, "onRestart() method was invoked without a previous state");
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,6 +126,7 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Log.d(Constants.TAG, "onResume() method was invoked without a previous state");
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onPause() {
         super.onPause();
@@ -98,6 +134,7 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Log.d(Constants.TAG, "onPause() method was invoked without a previous state");
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onStop() {
         super.onStop();
@@ -105,6 +142,7 @@ public class LifecycleMonitorActivity extends AppCompatActivity {
         Log.d(Constants.TAG, "onStop() method was invoked without a previous state");
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onDestroy() {
         super.onDestroy();
